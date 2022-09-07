@@ -6,7 +6,7 @@ from typing import Dict, List, Union
 from ruamel.yaml import YAML
 from ruamel.yaml.constructor import DuplicateKeyError
 
-from raise_me import PROVIDER_SERVICES
+from raise_me import PROVIDERS
 from .event import EventSource, EventTarget, RaiseEvent
 
 
@@ -96,8 +96,8 @@ class DeploymentParser:
         """Validates RaiseEvent.Source format (e.g., AWS::S3)."""
         split = src.split('::')
         return len(split) == 2 and \
-            split[0] in PROVIDER_SERVICES and \
-            split[1] in PROVIDER_SERVICES[split[0]]
+            split[0] in PROVIDERS and \
+            split[1] in PROVIDERS[split[0]]
 
     @classmethod
     def valid_target(self, endpoints: List[str]) -> bool:
