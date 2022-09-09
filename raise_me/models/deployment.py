@@ -1,10 +1,7 @@
-import pathlib
-
 from dataclasses import dataclass, field
-from typing import Dict, List, Union
+from typing import List
 
 from .event import RaiseEvent
-from raise_me.parser import DeploymentParser
 
 
 @dataclass
