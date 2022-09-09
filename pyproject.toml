@@ -1,11 +1,26 @@
 [tool.poetry]
 name = "raise-me"
 version = "0.0.1"
-description = ""
-authors = ["Fernando Ancona Camara <fernando.ancona@claytabase.co.uk>"]
+description = "Multi-cloud serverless event broker which allows connecting events with targets declaratively, where such events and targets can be raised/invoked in either AWS or GCP."
+authors = ["Fernando Ancona <f.anconac@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+raise = "raise_me.app:app"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+boto3 = "^1.24.50"
+requests = "^2.28.1"
+virtualenv = "^20.16.3"
+pipenv = "^2022.8.19"
+cdktf = "^0.12.1"
+cdktf-cdktf-provider-aws = "^9.0.15"
+"ruamel.yaml" = "^0.17.21"
+constructs = "^10.1.85"
+pulumi = "^3.38.0"
+pulumi-aws = "^5.11.0"
+typer = {extras = ["all"], version = "^0.6.1"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
