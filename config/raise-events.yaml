@@ -1,0 +1,13 @@
+
+events:    
+  my-test-event:
+    source:
+      provider: aws
+      filters:
+        - 'source=["aws.s3", "aws.lambda"]'
+    targets:
+      - http:
+        method: get
+        url: my-http-endpoint
+      - custom:
+        filename: my-custom-target-name
