@@ -7,5 +7,10 @@ class InvalidEvent(SyntaxError):
 
 
 class UnrecognizedTargetType(Exception):
-    """Exceptioni when EventTarget type is unrecognized."""
+    """Exception when EventTarget type is not valid."""
+    pass
+
+
+class UnrecognizedHttpMethod(Exception):
+    """Exception when http method is not valid."""
     pass

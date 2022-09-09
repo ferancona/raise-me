@@ -1,4 +1,5 @@
 from raise_me.exceptions import UnrecognizedTargetType
+from raise_me.models.event import HttpMethod
 
 from raise_me.models.event.target import CustomTarget, EventTarget, HttpTarget
 
@@ -50,7 +51,7 @@ class HttpTargetParser:
     @classmethod
     def from_dict(cls, http_target: dict) -> HttpTarget:
         return HttpTarget(
-            method=http_target['method'],
+            method=HttpMethod.from_str(val=http_target['method']),
             url=http_target['url'],
         )
 
