@@ -1,4 +1,23 @@
 
+### Example
+```yaml
+events:    
+  s3-to-cloudfunction:
+    source:
+      provider: aws
+      filters: # AWS event patterns or GCP Eventrac filters.
+        - 'source: ["aws.s3"]'
+        - 'detail-type: ["Object Created"]'
+        - 'detail: {"bucket": {"name": ["my-bucket-name"]}}'
+    targets:
+      - http:
+            method: get
+            url: my-cloudfunction-url
+      - custom:
+            filename: my-custom-target-name
+```
+Cutom targets are user-defined serverless functions deployed in [Apache OpenWhisk](https://openwhisk.apache.org/) as *Actions* that are triggered when the event defined in 'source' is raised.
+
 ### Roadmap
 - [X] Parser module
 - [ ] Builder module
