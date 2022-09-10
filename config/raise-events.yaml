@@ -1,13 +1,15 @@
 
 events:    
-  my-test-event:
+  s3-to-cloudfunction:
     source:
       provider: aws
-      filters:
-        - 'source=["aws.s3", "aws.lambda"]'
+      filters: # AWS EventBridge event patterns or GCP Eventrac filters.
+        - 'source: ["aws.s3"]'
+        - 'detail-type: ["Object Created"]'
+        - 'detail: {"bucket": {"name": ["my-bucket-name"]}}'
     targets:
       - http:
-        method: get
-        url: my-http-endpoint
+            method: get
+            url: my-cloudfunction-url
       - custom:
-        filename: my-custom-target-name
+            filename: my-custom-target-name
