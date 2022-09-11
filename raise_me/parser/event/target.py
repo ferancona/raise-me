@@ -1,7 +1,8 @@
+from typing import Dict
 from raise_me.exceptions import UnrecognizedTargetType
 from raise_me.models.event import HttpMethod
 
-from raise_me.models.event.target import CustomTarget, EventTarget, HttpTarget
+from raise_me.models.event.target import ActionTarget, EventTarget, HttpTarget
 
 
 class EventTargetParser:
@@ -16,7 +17,7 @@ class EventTargetParser:
         if t_type == 'http':
             return HttpTargetParser.from_dict(http_target=target[t_type])
         elif t_type == 'custom':
-            return CustomTargetParser.from_dict(custom_target=target[t_type])
+            return ActionTargetParser.from_dict(action_target=target[t_type])
             
         raise UnrecognizedTargetType(f'{target}')
 
@@ -33,7 +34,7 @@ class EventTargetParser:
 
             valid_target = HttpTargetParser.valid(http_target=target[t_type]) \
                 if t_type == 'http' \
-                else CustomTargetParser.valid(custom_target=target[t_type])
+                else ActionTargetParser.valid(action_target=target[t_type])
             
             if not valid_target:
                 return False
@@ -70,21 +71,21 @@ class HttpTargetParser:
         return True
 
 
-class CustomTargetParser:
+class ActionTargetParser:
     VALID_KEYS = (
-        'filename',
+        'name',
     )
 
     @classmethod
-    def from_dict(cls, custom_target: dict) -> CustomTarget:
-        return CustomTarget(
-            filename=custom_target['filename'],
+    def from_dict(cls, action_target: dict) -> ActionTarget:
+        return ActionTarget(
+            name=action_target['name'],
         )
 
     @classmethod
-    def valid(cls, custom_target: dict) -> bool:
-        if 'filename' not in custom_target:
+    def valid(cls, action_target: dict) -> bool:
+        if 'name' not in action_target:
             return False
-        if not isinstance(custom_target['filename'], str):
+        if not isinstance(action_target['name'], str):
             return False
         return True

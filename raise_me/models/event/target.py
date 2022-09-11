@@ -19,8 +19,8 @@ class HttpTarget(EventTarget):
 
 
 @dataclass(frozen=True)
-class CustomTarget(EventTarget):
-    filename: str
+class ActionTarget(EventTarget):
+    name: str
 
     def __str__(self) -> str:
-        return f'CustomTarget: {self.filename}'
+        return f'CustomTarget: {self.name}'
