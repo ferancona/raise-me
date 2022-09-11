@@ -12,4 +12,4 @@ events:
             method: get
             url: my-cloudfunction-url
       - action:
-            name: my-action-name
+            name: my-openwhisk-action-name

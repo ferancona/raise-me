@@ -14,7 +14,7 @@ events:
             method: get
             url: my-cloudfunction-url
       - action:
-            name: my-action-name
+            name: my-openwhisk-action-name
 ```
 Cutom targets are user-defined serverless functions deployed in [Apache OpenWhisk](https://openwhisk.apache.org/) as *Actions* that are triggered when the event defined in 'source' is raised.
 
