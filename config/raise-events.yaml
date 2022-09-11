@@ -11,5 +11,5 @@ events:
       - http:
             method: get
             url: my-cloudfunction-url
-      - custom:
-            filename: my-custom-target-name
+      - action:
+            name: my-action-name

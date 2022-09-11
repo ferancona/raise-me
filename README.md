@@ -5,7 +5,7 @@ events:
   s3-to-cloudfunction:
     source:
       provider: aws
-      filters: # AWS event patterns or GCP Eventrac filters.
+      filters: # AWS EventBridge event patterns or GCP Eventrac filters.
         - 'source: ["aws.s3"]'
         - 'detail-type: ["Object Created"]'
         - 'detail: {"bucket": {"name": ["my-bucket-name"]}}'
@@ -13,10 +13,12 @@ events:
       - http:
             method: get
             url: my-cloudfunction-url
-      - custom:
-            filename: my-custom-target-name
+      - action:
+            name: my-action-name
 ```
 Cutom targets are user-defined serverless functions deployed in [Apache OpenWhisk](https://openwhisk.apache.org/) as *Actions* that are triggered when the event defined in 'source' is raised.
+
+-----
 
 ### Roadmap
 - [X] Parser module
@@ -36,5 +38,5 @@ Cutom targets are user-defined serverless functions deployed in [Apache OpenWhis
 - [ ] Add setup instructions (e.g., enabling google services)
 
 
-#### Next version
+#### Future features
 - [ ] Logging
