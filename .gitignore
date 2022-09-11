@@ -18,3 +18,8 @@ resources/helm/
 
 # Pulumi
 pulumi/
+
+# NodeJS
+node_modules/
+package.json
+package-lock.json
