@@ -10,8 +10,8 @@ OPENWHISK_CHART_PATH = RESOURCES_PATH / 'helm' / 'openwhisk'
 DEPLOYMENT_PATH = PROJECT_PATH / 'config' / 'raise-events.yaml'
 CUSTOM_TARGETS_PATH = RESOURCES_PATH / 'custom-targets'
 
-# Available providers.
+# Providers available.
 PROVIDERS = (
-    'AWS',
-    'GCP',
+    'aws',
+    'gcp',
 )
