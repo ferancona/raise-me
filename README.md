@@ -16,7 +16,7 @@ events:
       - action:
             name: my-openwhisk-action-name
 ```
-Cutom targets are user-defined serverless functions deployed in [Apache OpenWhisk](https://openwhisk.apache.org/) as *Actions* that are triggered when the event defined in 'source' is raised.
+Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](https://openwhisk.apache.org/) that are triggered when the event defined in 'source' is raised.
 
 -----
 
@@ -24,8 +24,6 @@ Cutom targets are user-defined serverless functions deployed in [Apache OpenWhis
 - [X] Parser module
 - [ ] Builder module
     - [ ] OpenWhisk resources
-        - [ ] Triggers
-        - [ ] Actions
     - [ ] Cloud resources
 - [ ] AWS utilities
     - [ ] Eventbridge
