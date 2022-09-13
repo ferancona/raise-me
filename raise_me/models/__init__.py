@@ -1,2 +1,3 @@
 from .deployment import Deployment
-from .event import RaiseEvent, EventSource, EventTarget
+from .event import RaiseEvent, EventSource, EventTarget, HttpTarget, \
+    ActionTarget
