@@ -25,10 +25,10 @@ Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](
 - [ ] Builder module
     - [X] OpenWhisk resources
     - [ ] Cloud resources
-        - [ ] AWS utilities
+        - [ ] AWS
             - [ ] Eventbridge
             - [ ] Lambda
-        - [ ] GCP utilities
+        - [ ] GCP
             - [ ] Eventrac
             - [ ] Workflows
 - [ ] CLI Tool
