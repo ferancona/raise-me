@@ -23,14 +23,14 @@ Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](
 ### Roadmap
 - [X] Parser module
 - [ ] Builder module
-    - [ ] OpenWhisk resources
+    - [X] OpenWhisk resources
     - [ ] Cloud resources
-- [ ] AWS utilities
-    - [ ] Eventbridge
-    - [ ] Lambda
-- [ ] GCP utilities
-    - [ ] Eventrac
-    - [ ] Workflows
+        - [ ] AWS utilities
+            - [ ] Eventbridge
+            - [ ] Lambda
+        - [ ] GCP utilities
+            - [ ] Eventrac
+            - [ ] Workflows
 - [ ] CLI Tool
 - [ ] Tests
 - [ ] Add setup instructions (e.g., enabling google services)
