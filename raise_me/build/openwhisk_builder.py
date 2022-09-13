@@ -33,7 +33,7 @@ class OpenwhiskBuilder:
         """
         # ? Implement logic to handle asynchronous creation of resources?
         
-        # Create 'raise-http-invoker' Action.
+        # Create 'raise-http-invoker' action by default.
         _ = self.create_http_invoker(
             name=HTTP_INVOKER_ACTION_NAME,
             wsk_client=self.wsk_client, 
@@ -76,6 +76,23 @@ class OpenwhiskBuilder:
                     trigger_name=trigger_name,
                     action_name=event_mediator_name,
                 )
+
+    def destroy_resources(self):
+        """Destroy all actions, triggers and rules created by this class."""
+        # TODO: Implement paginator to be able to get all resources.
+        self.wsk_client.delete_action(name=HTTP_INVOKER_ACTION_NAME)
+
+        for action_name in self.wsk_client.list_actions():
+            if action_name.startswith('raise_mediator-'):
+                self.wsk_client.delete_rule(name=action_name)
+        
+        for rule_name in self.wsk_client.list_rules():
+            if rule_name.startswith('raise_rule-'):
+                self.wsk_client.delete_rule(name=rule_name)
+        
+        for trigger_name in self.wsk_client.list_triggers():
+            if trigger_name.startswith('raise_trigger-'):
+                self.wsk_client.delete_trigger(name=trigger_name)
 
     @classmethod
     def create_http_invoker(cls,
