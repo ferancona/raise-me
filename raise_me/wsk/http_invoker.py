@@ -12,6 +12,6 @@ def main(args: dict) -> dict:
     if http_method == 'get':
         r = requests.get(url)
     else: # post
-        r = requests.post(url, data={event})
+        r = requests.post(url, json=event)
     
     return r.json()

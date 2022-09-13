@@ -20,16 +20,14 @@ def main(args: dict) -> dict:
         _ = requests.post(
             invoker_url,
             auth=AUTH,
-            data={
-                'actionName': invoker_name,
-                'namespace': ns,
-                'payload': {
-                    'event': event,
-                    'http_target': target,
-                },
+            json={
+                'event': event,
+                'http_target': target,
+            },
+            params={
                 'blocking': False,
                 'result': False,
-            }
+            },
         )
 
     return {}
