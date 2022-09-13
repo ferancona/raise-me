@@ -1,11 +1,13 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 from . import HttpMethod
 
 
 class EventTarget(ABC):
-    pass
+    @abstractmethod
+    def json(self):
+        raise NotImplementedError()
 
 
 @dataclass(frozen=True)
@@ -17,6 +19,12 @@ class HttpTarget(EventTarget):
     def __str__(self) -> str:
         return f'HttpTarget: {self.method}|{self.url}'
 
+    def json(self):
+        return {
+            'method': self.method.value,
+            'url': self.url,
+        }
+
 
 @dataclass(frozen=True)
 class ActionTarget(EventTarget):
@@ -24,3 +32,8 @@ class ActionTarget(EventTarget):
 
     def __str__(self) -> str:
         return f'CustomTarget: {self.name}'
+    
+    def json(self):
+        return {
+            'name': self.name,
+        }
