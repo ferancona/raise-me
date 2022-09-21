@@ -1,3 +1,4 @@
+import json
 from typing import Dict, List, Union
 
 from raise_me import PROVIDERS
@@ -40,6 +41,22 @@ class EventSourceParser:
 
 
 class FilterParser:
+
+    @classmethod
+    def to_aws_event_pattern(cls, 
+                             filters: List[str],
+                            ) -> Dict[str, Union[str, List, Dict]]:
+        filters = filters.copy()
+        for index, f in enumerate(filters):
+            separator_index = f.index(':')
+            key, val = f[:separator_index], f[separator_index:]
+            filters[index] = (key, val)
+        
+        return json.dumps({key: val for key, val in filters})
+    
+    @classmethod
+    def to_eventrac_filters(cls, filters: List[str]) -> List[str]:
+        return filters
 
     @classmethod
     def valid(cls, filters: List[str], provider: str) -> bool:
