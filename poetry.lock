@@ -136,6 +136,20 @@ python-versions = ">=3.7"
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
+name = "cloudevents"
+version = "1.6.1"
+description = ""
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+deprecation = ">=2.0,<3.0"
+
+[package.extras]
+pydantic = ["pydantic (>=1.0.0)", "pydantic (>=1.0.0)"]
+
+[[package]]
 name = "colorama"
 version = "0.4.5"
 description = "Cross-platform colored terminal text."
@@ -166,6 +180,17 @@ python-versions = "~=3.7"
 jsii = ">=1.65.0,<2.0.0"
 publication = ">=0.0.3"
 typeguard = ">=2.13.3,<2.14.0"
+
+[[package]]
+name = "deprecation"
+version = "2.1.0"
+description = "A library to handle automated deprecations"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+packaging = "*"
 
 [[package]]
 name = "dill"
@@ -267,7 +292,7 @@ python-versions = ">=3.5"
 name = "packaging"
 version = "21.3"
 description = "Core utilities for Python packages"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -400,7 +425,7 @@ plugins = ["importlib-metadata"]
 name = "pyparsing"
 version = "3.0.9"
 description = "pyparsing module - Classes and methods to define and execute parsing grammars"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6.8"
 
@@ -631,7 +656,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "a2f4c31157cc83d71ed015cd6c886861448bc3af8099edd19d3b2fcafcb5e20e"
+content-hash = "eae1fa3239ce8d79f3feea731c43e7c03f7c9375577481349ade392ab2751d49"
 
 [metadata.files]
 arpeggio = [
@@ -677,6 +702,10 @@ click = [
     {file = "click-8.1.3-py3-none-any.whl", hash = "sha256:bb4d8133cb15a609f44e8213d9b391b0809795062913b383c62be0ee95b1db48"},
     {file = "click-8.1.3.tar.gz", hash = "sha256:7682dc8afb30297001674575ea00d1814d808d6a36af415a82bd481d37ba7b8e"},
 ]
+cloudevents = [
+    {file = "cloudevents-1.6.1-py3-none-any.whl", hash = "sha256:b65b6babdc25881181387592e84fe2f2dc35369b0b686ff0cab87950ea0ea256"},
+    {file = "cloudevents-1.6.1.tar.gz", hash = "sha256:3344e3c53a46bab1f30f3361d4cddd70628911849b960b31a1300a949da20553"},
+]
 colorama = [
     {file = "colorama-0.4.5-py2.py3-none-any.whl", hash = "sha256:854bf444933e37f5824ae7bfc1e98d5bce2ebe4160d46b5edf346a89358e99da"},
     {file = "colorama-0.4.5.tar.gz", hash = "sha256:e6c6b4334fc50988a639d9b98aa429a0b57da6e17b9a44f0451f930b6967b7a4"},
@@ -688,6 +717,10 @@ commonmark = [
 constructs = [
     {file = "constructs-10.1.85-py3-none-any.whl", hash = "sha256:dbcdeda26e61df8855af81e915a338345ca2d33f04b2b2861ac3a19fe98c5cfd"},
     {file = "constructs-10.1.85.tar.gz", hash = "sha256:70b2b4d75760524ff903aae0056862cd83ad9b0a5b857d9aef50597c8bbf4cfc"},
+]
+deprecation = [
+    {file = "deprecation-2.1.0-py2.py3-none-any.whl", hash = "sha256:a10811591210e1fb0e768a8c25517cabeabcba6f0bf96564f8ff45189f90b14a"},
+    {file = "deprecation-2.1.0.tar.gz", hash = "sha256:72b3bde64e5d778694b0cf68178aed03d15e15477116add3fb773e581f9518ff"},
 ]
 dill = [
     {file = "dill-0.3.5.1-py2.py3-none-any.whl", hash = "sha256:33501d03270bbe410c72639b350e941882a8b0fd55357580fbc873fba0c59302"},
