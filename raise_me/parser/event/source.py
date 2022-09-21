@@ -41,7 +41,6 @@ class EventSourceParser:
 
 
 class FilterParser:
-
     @classmethod
     def to_aws_event_pattern(cls, 
                              filters: List[str],

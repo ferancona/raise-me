@@ -1,2 +1,3 @@
 from .deployment import DeploymentParser
-from .event import RaiseEventParser, EventSourceParser, EventTargetParser
+from .event import RaiseEventParser, EventSourceParser, EventTargetParser, \
+    FilterParser
