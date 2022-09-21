@@ -4,9 +4,9 @@ from typing import List, Union
 from requests.models import Response
 
 from raise_me.models import Deployment, HttpTarget, ActionTarget
+from raise_me.identity import OWResourceIdentifier
 from raise_me.wsk import WskClient
-from raise_me.wsk import HTTP_MEDIATOR_PATH, HTTP_INVOKER_PATH, \
-    HTTP_INVOKER_ACTION_NAME
+from raise_me.wsk import HTTP_MEDIATOR_PATH, HTTP_INVOKER_PATH
 
 
 class OpenwhiskBuilder:
@@ -35,7 +35,7 @@ class OpenwhiskBuilder:
         
         # Create 'raise-http-invoker' action by default.
         _ = self.create_http_invoker(
-            name=HTTP_INVOKER_ACTION_NAME,
+            name=OWResourceIdentifier.http_invoker(),
             wsk_client=self.wsk_client, 
             path=HTTP_INVOKER_PATH,
         )
@@ -51,20 +51,25 @@ class OpenwhiskBuilder:
                     targets_to_trigger.append(target)
             
             # Create a event trigger.
-            trigger_name = f'raise_trigger-{event.logical_name}'
+            trigger_name = OWResourceIdentifier.trigger(
+                event_name=event.logical_name)
             _ = self.wsk_client.create_trigger(name=trigger_name)
 
             # Create a rule for every user-defined action_target.
             for target in targets_to_trigger:
                 _ = self.wsk_client.create_rule(
-                    name=f'raise_rule-{trigger_name}-{target.name}',
+                    name=OWResourceIdentifier.rule(
+                        trigger_name=trigger_name,
+                        target_name=target.name,
+                    ),
                     trigger_name=trigger_name,
                     action_name=target.name,
                 )
             
             if len(targets_to_mediate) > 0:
                 # Create http-mediator event action and link to trigger.
-                event_mediator_name = f'raise_mediator-{event.logical_name}'
+                event_mediator_name = OWResourceIdentifier.http_mediator(
+                    event_name=event.logical_name)
                 _ = self.create_http_mediator(
                     name=event_mediator_name,
                     http_targets=targets_to_mediate,
