@@ -1,3 +1,5 @@
+from .openwhisk_builder import OpenwhiskBuilder
+
 from raise_me import RAISE_CONFIG_PATH, RESOURCES_PATH
 from raise_me.parser import ConfigParser
 
