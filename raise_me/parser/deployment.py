@@ -1,5 +1,5 @@
 import pathlib
-from typing import Union
+from typing import Dict, Union
 
 from ruamel.yaml import YAML
 from ruamel.yaml.constructor import DuplicateKeyError
@@ -16,7 +16,7 @@ class DeploymentParser:
         parser = YAML(typ='safe')
         try:
             with open(path, 'r') as f:
-                yaml_ = parser.load(f.read())
+                yaml_: Dict = parser.load(f.read())
         except DuplicateKeyError as err:
             # Log.
             raise err
