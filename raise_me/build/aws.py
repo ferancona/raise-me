@@ -1,22 +1,25 @@
 import json
-from typing import List
+from typing import Dict, List
 
 import pulumi
 import pulumi_aws as aws
 
+from . import CLOUDEVENTS_LAYER_PATH, LAMBDA_TRIGGER_PATH
 from raise_me.models import RaiseEvent
 from raise_me.identity import OWResourceIdentifier
 from raise_me.parser import FilterParser
-from . import CLOUDEVENTS_LAYER_PATH, LAMBDA_TRIGGER_PATH
-from . import EVENT_BUS_NAME, OW_ENDPOINT, OW_USERNAME, OW_PASSWORD
 
 
-class AWSBuilder:
+class AWSCloud:
+    def __init__(self, config: Dict) -> None:
+        self.conf = config
+        self.event_bus_name = config['aws']['event-bus-name']
+
     def update_stack(self, events: List[RaiseEvent]):
         if len(events) > 0:
             event_bus = aws.cloudwatch.EventBus(
-                resource_name=EVENT_BUS_NAME,
-                name=EVENT_BUS_NAME,
+                resource_name=self.event_bus_name,
+                name=self.event_bus_name,
             )
             
             cloudevents_layer = aws.lambda_.LayerVersion(
@@ -43,6 +46,8 @@ class AWSBuilder:
             )
             
             for event in events:
+                ow_conf: Dict = self.conf['openwhisk']
+
                 event_lambda = aws.lambda_.Function(
                     resource_name=f'aws_lambda-function_{event.logical_name}',
                     code=str(LAMBDA_TRIGGER_PATH),
@@ -53,9 +58,9 @@ class AWSBuilder:
                         variables={
                             'TRIGGER_NAME': OWResourceIdentifier.trigger(
                                 event_name=event.logical_name),
-                            'OW_URL': OW_ENDPOINT,
-                            "OW_USER": OW_USERNAME,
-                            'OW_PASS': OW_PASSWORD,
+                            'OW_URL': ow_conf['endpoint'],
+                            "OW_USER": ow_conf['auth']['username'],
+                            'OW_PASS': ow_conf['auth']['password'],
                         },
                     ),
                     layers=[cloudevents_layer.arn],
