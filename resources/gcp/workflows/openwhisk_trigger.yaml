@@ -10,7 +10,7 @@ main:
       args:
           text: ${event}
           severity: INFO
-  - invoke_cloud_function:
+  - fire_openwhisk_trigger:
       call: http.post
       args:
         url: ${OW_URL}/triggers/${TRIGGER_NAME}
