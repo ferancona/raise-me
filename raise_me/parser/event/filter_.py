@@ -15,7 +15,7 @@ class FilterParser:
         return json.dumps({key: val for key, val in filters})
     
     @classmethod
-    def to_eventrac_filters(cls, filters: List[str]) -> List[str]:
+    def to_eventrac_filters(cls, filters: List[str]) -> List[Dict[str, str]]:
         filters = filters.copy()
         for index, f in enumerate(filters):
             sep_index = f.index('=')
