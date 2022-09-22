@@ -16,6 +16,26 @@ class AWSCloud:
         self.event_bus_name = config['aws']['event-bus-name']
 
     def update_stack(self, events: List[RaiseEvent]):
+        """
+
+        Creates the following resources:
+        - EventBridge Event Bus.
+        - Lambda layer for 'cloudevents' python module.
+        - For each event.source:
+            - Lambda:
+                - Converts AWS event to CloudEvent format.
+                - Fires Openwhisk Trigger via REST API.
+            - Event Rule: triggers Lambda from event.
+        """
+        """
+        
+        Creates the following resources:
+        - For every event.source:
+            - Workflow:
+                - Receives event.
+                - Makes API call to corresponding openwhisk trigger.
+            - Eventrac Trigger: Triggers workflow from event.
+        """
         if len(events) > 0:
             event_bus = aws.cloudwatch.EventBus(
                 resource_name=self.event_bus_name,
