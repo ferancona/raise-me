@@ -403,6 +403,19 @@ pulumi = ">=3.0.0,<4.0.0"
 semver = ">=2.8.1"
 
 [[package]]
+name = "pulumi-gcp"
+version = "6.37.0"
+description = "A Pulumi package for creating and managing Google Cloud Platform resources."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+parver = ">=0.2.1"
+pulumi = ">=3.0.0,<4.0.0"
+semver = ">=2.8.1"
+
+[[package]]
 name = "py"
 version = "1.11.0"
 description = "library with cross-python path, ini-parsing, io, code, log facilities"
@@ -656,7 +669,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "eae1fa3239ce8d79f3feea731c43e7c03f7c9375577481349ade392ab2751d49"
+content-hash = "691b32950678eaf2c96cceb1ea14a5759ab4911ef7d5472f323044b3f3f8aff7"
 
 [metadata.files]
 arpeggio = [
@@ -847,6 +860,9 @@ pulumi = [
 ]
 pulumi-aws = [
     {file = "pulumi_aws-5.11.0.tar.gz", hash = "sha256:30c9c5c3b7b2fb22a4aaeb8b01fb80bdf10afd1b5bb395ea027eeade8f49dc40"},
+]
+pulumi-gcp = [
+    {file = "pulumi_gcp-6.37.0.tar.gz", hash = "sha256:e9fd9bb94d8ad3b15fd694c5cce8114d77d1d2499821ba1f6749cba5110f3dcd"},
 ]
 py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
