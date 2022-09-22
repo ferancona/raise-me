@@ -1,6 +1,17 @@
+
 openwhisk:
-  namespace: raise-me # Location to store Openwhisk resources.
-  apihost: # Openwhisk deployment endpoint.
+  namespace: raise-me # Storage location of Openwhisk resources.
+  endpoint: # Openwhisk deployment endpoint.
   auth: # Authentication for REST API.
     username: 23bc46b1-71f6-4ed5-8c54-816aa4f8c502
     password: 123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP
+
+aws:
+  # Default account and region will be taken from AWS CLI config.
+  event-bus-name: raise-me
+
+gcp:
+  # Account, project and region used for cloud resource creation.
+  account-id: my-account-id
+  project-id: my-project-id
+  region: europe-west2 
