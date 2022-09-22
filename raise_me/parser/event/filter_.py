@@ -9,14 +9,18 @@ class FilterParser:
                             ) -> Dict[str, Union[str, List, Dict]]:
         filters = filters.copy()
         for index, f in enumerate(filters):
-            separator_index = f.index(':')
-            key, val = f[:separator_index], f[separator_index:]
+            sep_index = f.index(':')
+            key, val = f[:sep_index], f[sep_index + 1:]
             filters[index] = (key, val)
-        
         return json.dumps({key: val for key, val in filters})
     
     @classmethod
     def to_eventrac_filters(cls, filters: List[str]) -> List[str]:
+        filters = filters.copy()
+        for index, f in enumerate(filters):
+            sep_index = f.index('=')
+            key, val = f[:sep_index], f[sep_index + 1:]
+            filters[index] = {'attribute': key, 'value': val}
         return filters
 
     @classmethod
