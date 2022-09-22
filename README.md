@@ -25,9 +25,9 @@ Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](
 - [ ] Builder module
     - [X] OpenWhisk resources
     - [ ] Cloud resources
-        - [ ] AWS
-            - [ ] Eventbridge
-            - [ ] Lambda
+        - [X] AWS
+            - [X] Eventbridge
+            - [X] Lambda
         - [ ] GCP
             - [ ] Eventrac
             - [ ] Workflows
