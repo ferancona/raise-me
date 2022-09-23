@@ -13,7 +13,7 @@ main:
   - fire_openwhisk_trigger:
       call: http.post
       args:
-        url: ${OW_URL}/triggers/${TRIGGER_NAME}
+        url: ${OW_URL + "/triggers/" + TRIGGER_NAME}
         body:
             event: ${event}
         headers:
