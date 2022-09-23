@@ -1,7 +1,8 @@
 
 ### Example
 ```yaml
-events:    
+events:
+
   s3-to-cloudfunction:
     source:
       provider: aws
@@ -15,6 +16,18 @@ events:
             url: my-cloudfunction-url
       - action:
             name: my-openwhisk-action-name
+  
+  cloudstorage-to-lambda:
+    source:
+      provider: gcp
+      filters:
+        - 'type=google.cloud.audit.log.v1.written'
+        - 'serviceName=storage.googleapis.com'
+        - 'methodName=storage.objects.create'
+    targets:
+      - http:
+          method: get
+          url: my-lambda-url
 ```
 Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](https://openwhisk.apache.org/) that are triggered when the event defined in 'source' is raised.
 
