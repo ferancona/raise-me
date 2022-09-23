@@ -31,7 +31,7 @@ Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](
         - [X] GCP
             - [X] Eventrac
             - [X] Workflows
-- [ ] CLI Tool
+- [X] CLI Tool
 - [ ] Tests
 - [ ] Add setup instructions (e.g., enabling google services)
 
