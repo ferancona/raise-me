@@ -77,35 +77,6 @@ attrs = ">=20"
 exceptiongroup = {version = "*", markers = "python_version <= \"3.10\""}
 
 [[package]]
-name = "cdktf"
-version = "0.12.1"
-description = "Cloud Development Kit for Terraform"
-category = "main"
-optional = false
-python-versions = "~=3.7"
-
-[package.dependencies]
-constructs = ">=10.0.25,<11.0.0"
-jsii = ">=1.63.2,<2.0.0"
-publication = ">=0.0.3"
-typeguard = ">=2.13.3,<2.14.0"
-
-[[package]]
-name = "cdktf-cdktf-provider-aws"
-version = "9.0.15"
-description = "Prebuilt aws Provider for Terraform CDK (cdktf)"
-category = "main"
-optional = false
-python-versions = "~=3.7"
-
-[package.dependencies]
-cdktf = ">=0.12.0,<0.13.0"
-constructs = ">=10.0.0,<11.0.0"
-jsii = ">=1.63.2,<2.0.0"
-publication = ">=0.0.3"
-typeguard = ">=2.13.3,<2.14.0"
-
-[[package]]
 name = "certifi"
 version = "2022.6.15"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -669,7 +640,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "691b32950678eaf2c96cceb1ea14a5759ab4911ef7d5472f323044b3f3f8aff7"
+content-hash = "f4e0ce1f9edd820d2c8a149f75a1c7c544a3581dccf37709bc72ab0c6bd04eb4"
 
 [metadata.files]
 arpeggio = [
@@ -694,14 +665,6 @@ botocore = [
 cattrs = [
     {file = "cattrs-22.1.0-py3-none-any.whl", hash = "sha256:d55c477b4672f93606e992049f15d526dc7867e6c756cd6256d4af92e2b1e364"},
     {file = "cattrs-22.1.0.tar.gz", hash = "sha256:94b67b64cf92c994f8784c40c082177dc916e0489a73a9a36b24eb18a9db40c6"},
-]
-cdktf = [
-    {file = "cdktf-0.12.1-py3-none-any.whl", hash = "sha256:730372a22dd1b40e2f315595fa90f5676737630444bf33129693fde4c82f9c48"},
-    {file = "cdktf-0.12.1.tar.gz", hash = "sha256:25faa19c462fa6cafc654296fa4ddeb4e2a31ad351297865b5ad39e5795f9efc"},
-]
-cdktf-cdktf-provider-aws = [
-    {file = "cdktf-cdktf-provider-aws-9.0.15.tar.gz", hash = "sha256:5dd7c915de11e26c7a4b8a59091615f74c108cc2a2d97b36f55472b30d1a30b8"},
-    {file = "cdktf_cdktf_provider_aws-9.0.15-py3-none-any.whl", hash = "sha256:34e8276e53aad8aee14edd21317e08d2fe440d2b2b8d14fc0d858fad9868a0a8"},
 ]
 certifi = [
     {file = "certifi-2022.6.15-py3-none-any.whl", hash = "sha256:fe86415d55e84719d75f8b69414f6438ac3547d2078ab91b67e779ef69378412"},
