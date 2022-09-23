@@ -25,7 +25,7 @@ class GCPWorkflowAdapter:
                         var['OW_URL'] = ...
             
             if 'fire_openwhisk_trigger' in step:
-                ow_auth: Dict = self.conf['openwhisk']['auth']
+                ow_auth: Dict[str, str] = self.conf['openwhisk']['auth']
                 headers = step['fire_openwhisk_trigger']['args']['headers']
                 headers['Authorization'] = 'Basic {}'.format(
                     base64.b64encode(
