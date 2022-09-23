@@ -8,15 +8,23 @@ class WskClient:
     DEFAULT_NS = '_'
 
     def __init__(self,
-                 api_host: str,
+                 url: str,
                  username: str,
                  password: str,
-                 ns: str=None,
-                 https: bool=False) -> None:
+                 ns: str=None) -> None:
         self.auth = (username, password)
         self.ns = ns if ns else self.DEFAULT_NS
-        self.url = '{}://{}/api/v1/namespaces/{}'.format(
-            "https" if https else "http", api_host, self.ns)
+        self.url = '{}/api/v1/namespaces/{}'.format(url, self.ns)
+
+    @classmethod
+    def from_config(cls, config: Dict) -> "WskClient":
+        ow: Dict = config['openwhisk']
+        return WskClient(
+            endpoint=ow['endpoint'],
+            username=ow['auth']['username'],
+            password=ow['auth']['password'],
+            ns=ow['namespace'],
+        )
 
     def create_action(self,
                       name: str,
