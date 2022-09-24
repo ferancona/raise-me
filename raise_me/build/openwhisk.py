@@ -84,18 +84,17 @@ class OpenwhiskBuilder:
 
     def destroy_resources(self):
         """Destroy all actions, triggers and rules created by this class."""
-        # TODO: Implement paginator to be able to get all resources.
         self.wsk_client.delete_action(name=OWResourceIdentifier.http_invoker())
 
-        for action_name in self.wsk_client.list_actions():
+        for action_name in self.wsk_client.action_paginator().paginate():
             if action_name.startswith('raise_mediator-'):
                 self.wsk_client.delete_rule(name=action_name)
         
-        for rule_name in self.wsk_client.list_rules():
+        for rule_name in self.wsk_client.rule_paginator().paginate():
             if rule_name.startswith('raise_rule-'):
                 self.wsk_client.delete_rule(name=rule_name)
         
-        for trigger_name in self.wsk_client.list_triggers():
+        for trigger_name in self.wsk_client.trigger_paginator().paginate():
             if trigger_name.startswith('raise_trigger-'):
                 self.wsk_client.delete_trigger(name=trigger_name)
 

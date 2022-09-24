@@ -1,3 +1,4 @@
+from pydoc import cli
 from typing import Dict, List
 
 import requests
@@ -126,41 +127,78 @@ class WskClient:
         )
         return r
     
-    def list_actions(self, limit=200) -> List[str]:
-        """Returns list of action names (max_size: 200)."""
-        # TODO: test
+    def list_actions(self, limit=200, skip=0) -> List[str]:
+        """Returns list of action names (max limit: 200)."""
         url = f'{self.url}/actions'
         r = requests.get(
             url,
             auth=self.auth,
             params={
                 'limit': limit,
+                'skip': skip,
             },
         )
         return [action['name'] for action in r.json()]
     
-    def list_triggers(self, limit=200) -> List[str]:
-        """Returns list of trigger names (max_size: 200)."""
-        # TODO: test
+    def list_triggers(self, limit=200, skip=0) -> List[str]:
+        """Returns list of trigger names (max limit: 200)."""
         url = f'{self.url}/triggers'
         r = requests.get(
             url,
             auth=self.auth,
             params={
-                'limit': 200,
+                'limit': limit,
+                'skip': skip,
             },
         )
         return [trigger['name'] for trigger in r.json()]
     
-    def list_rules(self, limit=200) -> List[str]:
-        """Returns list of rule names (max_size: 200)."""
-        # TODO: test
+    def list_rules(self, limit=200, skip=0) -> List[str]:
+        """Returns list of rule names (max limit: 200)."""
         url = f'{self.url}/rules'
         r = requests.get(
             url,
             auth=self.auth,
             params={
-                'limit': 200,
+                'limit': limit,
+                'skip': skip,
             },
         )
         return [rule['name'] for rule in r.json()]
+    
+    def action_paginator(self):
+        return WskPaginator(client=self, resource='action')
+    
+    def trigger_paginator(self):
+        return WskPaginator(client=self, resource='trigger')
+
+    def rule_paginator(self):
+        return WskPaginator(client=self, resource='rule')
+
+
+class WskPaginator:
+    def __init__(self, client: WskClient, resource: str) -> None:
+        self.client = client
+
+        if resource == 'action':
+            self.list_method = self.client.list_actions
+        elif resource == 'trigger':
+            self.list_method = self.client.list_triggers
+        elif resource == 'rule':
+            self.list_method = self.client.list_rules
+        else:
+            raise AttributeError(
+                f'No paginator found for resource {resource}.')
+    
+    def paginate(self):
+        limit = 200
+        skip = 0
+        resources = self.list_method(limit=limit, skip=skip)
+        while len(resources) == 200:
+            for action in resources:
+                yield action
+            skip += 200
+            resources = self.list_method(limit=limit, skip=skip)
+        if len(resources) > 0:
+            for action in resources:
+                yield action
