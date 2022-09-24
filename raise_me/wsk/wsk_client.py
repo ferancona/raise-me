@@ -1,5 +1,4 @@
-from pydoc import cli
-from typing import Dict, List
+from typing import Dict, Iterator, List
 
 import requests
 from requests.models import Response
@@ -21,7 +20,7 @@ class WskClient:
     def from_config(cls, config: Dict) -> "WskClient":
         ow: Dict = config['openwhisk']
         return WskClient(
-            endpoint=ow['endpoint'],
+            url=ow['endpoint'],
             username=ow['auth']['username'],
             password=ow['auth']['password'],
             ns=ow['namespace'],
@@ -166,13 +165,13 @@ class WskClient:
         )
         return [rule['name'] for rule in r.json()]
     
-    def action_paginator(self):
+    def action_paginator(self) -> "WskPaginator":
         return WskPaginator(client=self, resource='action')
     
-    def trigger_paginator(self):
+    def trigger_paginator(self) -> "WskPaginator":
         return WskPaginator(client=self, resource='trigger')
 
-    def rule_paginator(self):
+    def rule_paginator(self) -> "WskPaginator":
         return WskPaginator(client=self, resource='rule')
 
 
@@ -190,7 +189,7 @@ class WskPaginator:
             raise AttributeError(
                 f'No paginator found for resource {resource}.')
     
-    def paginate(self):
+    def paginate(self) -> Iterator[str]:
         limit = 200
         skip = 0
         resources = self.list_method(limit=limit, skip=skip)
