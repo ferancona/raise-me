@@ -26,7 +26,7 @@ class EventTargetParser:
         """Validates targets' syntax in terms of key values and types."""
         if isinstance(target, dict) and \
                 len(target.keys()) == 1 and \
-                target.keys()[0] in cls.VALID_KEYS:
+                list(target.keys())[0] in cls.VALID_KEYS:
             t_type = target.keys()[0]
 
             if not isinstance(target[t_type], dict):
