@@ -12,11 +12,11 @@ class DeploymentParser:
     def from_yaml(cls, path: Union[str, pathlib.Path]) -> Deployment:
         yaml_: Dict = YAMLParser.parse(path=path)
         
-        if 'Events' not in yaml_:
+        if 'events' not in yaml_:
             raise SyntaxError('"Events" configuration not found.')
 
-        if not isinstance(yaml_['Events'], dict):
-            raise SyntaxError('"Events" configuration not found.')
+        if not isinstance(yaml_['events'], dict):
+            raise SyntaxError('"events" configuration not found.')
         
         return Deployment(
-            events=RaiseEventParser.parse_events(events=yaml_['Events']))
+            events=RaiseEventParser.parse_events(events=yaml_['events']))
