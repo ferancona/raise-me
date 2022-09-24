@@ -6,7 +6,7 @@ import pulumi_aws as aws
 
 from . import CLOUDEVENTS_LAYER_PATH, LAMBDA_TRIGGER_PATH
 from raise_me.models import RaiseEvent
-from raise_me.identity import OWResourceIdentifier
+from raise_me.identity.openwhisk import OWResourceIdentifier
 from raise_me.parser import FilterParser
 
 
@@ -26,15 +26,6 @@ class AWSCloud:
                 - Converts AWS event to CloudEvent format.
                 - Fires Openwhisk Trigger via REST API.
             - Event Rule: triggers Lambda from event.
-        """
-        """
-        
-        Creates the following resources:
-        - For every event.source:
-            - Workflow:
-                - Receives event.
-                - Makes API call to corresponding openwhisk trigger.
-            - Eventrac Trigger: Triggers workflow from event.
         """
         if len(events) > 0:
             event_bus = aws.cloudwatch.EventBus(

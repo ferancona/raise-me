@@ -3,7 +3,7 @@ from typing import Dict, Union
 
 from raise_me.models import Deployment
 
-from . import YAMLParser
+from .yaml_parser import YAMLParser
 from .event import RaiseEventParser
 
 

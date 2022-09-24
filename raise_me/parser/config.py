@@ -1,7 +1,7 @@
 import pathlib
 from typing import Dict, Union
 
-from . import YAMLParser
+from .yaml_parser import YAMLParser
 
 
 class ConfigParser:
@@ -16,4 +16,4 @@ class ConfigParser:
     @classmethod
     def valid(cls, config: Dict) -> bool:
         # TODO.
-        ...
+        return True

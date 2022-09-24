@@ -4,7 +4,7 @@ from typing import List, Union
 from requests.models import Response
 
 from raise_me.models import Deployment, HttpTarget, ActionTarget
-from raise_me.identity import OWResourceIdentifier
+from raise_me.identity.openwhisk import OWResourceIdentifier
 from raise_me.wsk import WskClient
 from raise_me.wsk import HTTP_MEDIATOR_PATH, HTTP_INVOKER_PATH
 

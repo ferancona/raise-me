@@ -1,7 +1,8 @@
 import pathlib
 from typing import Dict, Union
 
-from . import AWSCloud, GCPCloud
+from .aws import AWSCloud
+from .gcp import GCPCloud
 from raise_me.models import Deployment
 from raise_me.parser import ConfigParser, DeploymentParser
 

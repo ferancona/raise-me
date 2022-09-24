@@ -4,7 +4,7 @@ import pulumi
 import pulumi_gcp as gcp
 
 from . import WORKFLOW_TRIGGER_PATH
-from raise_me.identity import OWResourceIdentifier
+from raise_me.identity.openwhisk import OWResourceIdentifier
 from raise_me.models import RaiseEvent
 from raise_me.parser import FilterParser
 from raise_me.util import GCPWorkflowAdapter
@@ -22,6 +22,15 @@ class GCPCloud:
         )
 
     def update_stack(self, events: List[RaiseEvent]):
+        """
+        
+        Creates the following resources:
+        - For every event.source:
+            - Workflow:
+                - Receives event.
+                - Makes API call to corresponding openwhisk trigger.
+            - Eventrac Trigger: Triggers workflow from event.
+        """
         if len(events) > 0:
             for event in events:
                 service_account = gcp.serviceaccount.Account(

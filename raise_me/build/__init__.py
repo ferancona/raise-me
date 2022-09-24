@@ -1,2 +1,4 @@
 from .openwhisk import OpenwhiskBuilder
-from .cloud import CloudOrchestrator, AWSCloud, GCPCloud
+from .cloud.orchestrator import CloudOrchestrator
+from .cloud.aws import AWSCloud
+from .cloud.gcp import GCPCloud
