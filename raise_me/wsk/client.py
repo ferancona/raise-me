@@ -1,11 +1,13 @@
-from typing import Dict, Iterator, List
+from typing import Dict, List
 
 import requests
 from requests.models import Response
 
+from .paginator import WskPaginator
+
 
 class WskClient:
-    DEFAULT_NS = '_'
+    DEFAULT_NS = 'guest'
 
     def __init__(self,
                  url: str,
@@ -74,8 +76,8 @@ class WskClient:
             auth=self.auth,
             json={
                 'name': name,
-                'trigger': trigger_name,
-                'action': action_name,
+                'trigger': f'/_/{trigger_name}',
+                'action': f'/_/{action_name}',
                 'status': 'active',
                 'publish': True,
             },
@@ -85,17 +87,17 @@ class WskClient:
     
     def delete_action(self, name: str) -> Response:
         url = f'{self.url}/actions/{name}'
-        r = requests.delete(url)
+        r = requests.delete(url, auth=self.auth)
         return r
     
     def delete_trigger(self, name: str) -> Response:
         url = f'{self.url}/triggers/{name}'
-        r = requests.delete(url)
+        r = requests.delete(url, auth=self.auth)
         return r
     
     def delete_rule(self, name: str):
         url = f'{self.url}/rules/{name}'
-        r = requests.delete(url)
+        r = requests.delete(url, auth=self.auth)
         return r
 
     def fire_trigger(self, name: str, args: Dict=None) -> Response:
@@ -173,31 +175,3 @@ class WskClient:
 
     def rule_paginator(self) -> "WskPaginator":
         return WskPaginator(client=self, resource='rule')
-
-
-class WskPaginator:
-    def __init__(self, client: WskClient, resource: str) -> None:
-        self.client = client
-
-        if resource == 'action':
-            self.list_method = self.client.list_actions
-        elif resource == 'trigger':
-            self.list_method = self.client.list_triggers
-        elif resource == 'rule':
-            self.list_method = self.client.list_rules
-        else:
-            raise AttributeError(
-                f'No paginator found for resource {resource}.')
-    
-    def paginate(self) -> Iterator[str]:
-        limit = 200
-        skip = 0
-        resources = self.list_method(limit=limit, skip=skip)
-        while len(resources) == 200:
-            for action in resources:
-                yield action
-            skip += 200
-            resources = self.list_method(limit=limit, skip=skip)
-        if len(resources) > 0:
-            for action in resources:
-                yield action
