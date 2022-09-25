@@ -30,9 +30,7 @@ class OpenwhiskBuilder:
             the 'raise-http-invoker' action for every http_target.
             - For each http_target:
                 - Create rule to link trigger to http_mediator.
-        """
-        # ? Implement logic to handle asynchronous creation of resources?
-        
+        """        
         # Create 'raise-http-invoker' action by default.
         _ = self.create_http_invoker(
             name=OWResourceIdentifier.http_invoker(),
@@ -88,7 +86,7 @@ class OpenwhiskBuilder:
 
         for action_name in self.wsk_client.action_paginator().paginate():
             if action_name.startswith('raise_mediator-'):
-                self.wsk_client.delete_rule(name=action_name)
+                self.wsk_client.delete_action(name=action_name)
         
         for rule_name in self.wsk_client.rule_paginator().paginate():
             if rule_name.startswith('raise_rule-'):
