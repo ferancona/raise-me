@@ -23,15 +23,25 @@ class ConfigParser:
     
     @classmethod
     def valid_openwhisk(cls, config: Dict) -> bool:
-        if 'openwhisk' not in config:
+        if 'openwhisk' not in config or \
+                not isinstance(config['openwhisk'], dict):
             return False
         
         ow = config['openwhisk']
         if 'namespace' not in ow or 'endpoint' not in ow or 'auth' not in ow:
             return False
         
+        if not isinstance(ow['namespace'], str) or \
+                not isinstance(ow['endpoint'], str) or \
+                not isinstance(ow['auth'], dict):
+            return False
+        
         auth = ow['auth']
         if 'username' not in auth or 'password' not in auth:
+            return False
+        
+        if not isinstance(auth['username'], str) or \
+                not isinstance(auth['password'], str):
             return False
         
         if len(ow['namespace'].strip()) == 0 or \
@@ -45,11 +55,16 @@ class ConfigParser:
     
     @classmethod
     def valid_gcp(cls, config: Dict) -> bool:
-        if 'gcp' not in config:
+        if 'gcp' not in config or \
+                not isinstance(config['gcp'], dict):
             return False
         
         gcp = config['gcp']
         if 'project-id' not in gcp or 'region' not in gcp:
+            return False
+
+        if not isinstance(gcp['project-id'], str) or \
+                not isinstance(gcp['region'], str):
             return False
         
         if len(gcp['project-id'].strip()) == 0 or \
