@@ -13,20 +13,8 @@ from raise_me.parser import FilterParser
 class AWSCloud:
     def __init__(self, config: Dict) -> None:
         self.conf = config
-        # self.event_bus_name = config['aws']['event-bus-name']
 
     def update_stack(self, events: List[RaiseEvent]):
-        """
-
-        Creates the following resources:
-        - EventBridge Event Bus.
-        - Lambda layer for 'cloudevents' python module.
-        - For each event.source:
-            - Lambda:
-                - Converts AWS event to CloudEvent format.
-                - Fires Openwhisk Trigger via REST API.
-            - Event Rule: triggers Lambda from event.
-        """
         if len(events) > 0:
             cloudevents_layer = aws.lambda_.LayerVersion(
                 resource_name='raise-me_lambda_cloudevents-layer',

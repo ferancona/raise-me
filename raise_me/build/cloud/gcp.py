@@ -13,7 +13,6 @@ from raise_me.util import GCPWorkflowAdapter
 class GCPCloud:
     def __init__(self, config: Dict) -> None:
         self.conf = config
-        self.account_id = config['gcp']['account-id']
         self.project_id = config['gcp']['project-id']
         self.region = config['gcp']['region']
         self.wf_helper = GCPWorkflowAdapter(
@@ -22,15 +21,6 @@ class GCPCloud:
         )
 
     def update_stack(self, events: List[RaiseEvent]):
-        """
-        
-        Creates the following resources:
-        - For every event.source:
-            - Workflow:
-                - Receives event.
-                - Makes API call to corresponding openwhisk trigger.
-            - Eventrac Trigger: Triggers workflow from event.
-        """
         if len(events) > 0:
             for event in events:
                 service_account = gcp.serviceaccount.Account(
