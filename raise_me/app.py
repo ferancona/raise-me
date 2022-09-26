@@ -16,7 +16,9 @@ def up(config_path: Optional[str] = None, deploy_path: Optional[str] = None):
     conf_path = RAISE_CONFIG_PATH if config_path is None else config_path
     deploy_path = RAISE_DEPLOYMENT_PATH if deploy_path is None else deploy_path
     
-    typer.echo('Creating OpenWhisk resources...')
+    typer.echo('Creating RaiseMe OpenWhisk resources...')
+    typer.echo(f' Configuration file: {conf_path}')
+    typer.echo(f' Deployment file: {deploy_path}')
     
     OpenwhiskBuilder(
         wsk_client=WskClient.from_config(
@@ -31,7 +33,7 @@ def up(config_path: Optional[str] = None, deploy_path: Optional[str] = None):
 def destroy(config_path: Optional[str] = None):
     conf_path = RAISE_CONFIG_PATH if config_path is None else config_path
 
-    typer.echo('Destroying OpenWhisk resources...')
+    typer.echo('Destroying RaiseMe OpenWhisk resources...')
 
     OpenwhiskBuilder(
         wsk_client=WskClient.from_config(
