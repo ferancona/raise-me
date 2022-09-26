@@ -6,21 +6,21 @@ events:
   s3-to-cloudfunction:
     source:
       provider: aws
-      filters: # AWS EventBridge event patterns or GCP Eventrac filters.
+      filters: # AWS EventBridge event patterns.
         - 'source: ["aws.s3"]'
         - 'detail-type: ["Object Created"]'
         - 'detail: {"bucket": {"name": ["my-bucket-name"]}}'
     targets:
       - http:
-            method: get
-            url: my-cloudfunction-url
+          method: get
+          url: my-cloudfunction-url
       - action:
-            name: my-openwhisk-action-name
-  
+          name: my-openwhisk-action-name
+
   cloudstorage-to-lambda:
     source:
       provider: gcp
-      filters:
+      filters: # GCP Eventrac filters.
         - 'type=google.cloud.audit.log.v1.written'
         - 'serviceName=storage.googleapis.com'
         - 'methodName=storage.objects.create'
@@ -45,9 +45,11 @@ Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](
             - [X] Eventrac
             - [X] Workflows
 - [X] CLI Tool
-- [ ] Tests
+- [X] Pytests
 - [ ] Add setup instructions (e.g., enabling google services)
+- [ ] Http request body/parameters
 
 
 #### Future features
+- [ ] Thorough user-defined exception handling
 - [ ] Logging
