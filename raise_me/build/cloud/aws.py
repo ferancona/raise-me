@@ -96,7 +96,7 @@ class AWSCloud:
                 )
 
                 allow_eventbridge = aws.lambda_.Permission(
-                    resource_name='allow-eventbridge-invoke-lambda',
+                    resource_name='raise-me_allow-eventbridge-invoke-lambda',
                     action='lambda:InvokeFunction',
                     function=event_lambda.name,
                     principal='events.amazonaws.com',
