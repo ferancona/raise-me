@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache
 *.py[cod]
 *$py.class
+dist/
 
 # Environments
 .env
@@ -15,7 +16,7 @@ __pycache__/
 resources/terraform/
 
 # Helm
-resources/helm/
+raise_me/resources/helm/
 
 # Pulumi
 pulumi/
