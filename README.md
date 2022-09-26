@@ -47,9 +47,12 @@ Action targets are your own user-defined Actions deployed in [Apache OpenWhisk](
 - [X] CLI Tool
 - [X] Pytests
 - [ ] Add setup instructions (e.g., enabling google services)
-- [ ] Http request body/parameters
 
 
 #### Future features
-- [ ] Thorough user-defined exception handling
+- [ ] Secure OpenWhisk API credentials
+  - [ ] AWS: SecretsManager
+  - [ ] GCP: SecretManager
+- [ ] Http request body/parameters
+- [ ] Thorough exception handling
 - [ ] Logging
