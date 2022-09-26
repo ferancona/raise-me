@@ -126,7 +126,7 @@ class WskClient:
         )
         return r
     
-    def list_actions(self, limit=200, skip=0) -> List[str]:
+    def list_actions(self, limit=200, skip=0) -> Response:
         """Returns list of action names (max limit: 200)."""
         url = f'{self.url}/actions'
         r = requests.get(
@@ -137,9 +137,9 @@ class WskClient:
                 'skip': skip,
             },
         )
-        return [action['name'] for action in r.json()]
+        return r
     
-    def list_triggers(self, limit=200, skip=0) -> List[str]:
+    def list_triggers(self, limit=200, skip=0) -> Response:
         """Returns list of trigger names (max limit: 200)."""
         url = f'{self.url}/triggers'
         r = requests.get(
@@ -150,9 +150,9 @@ class WskClient:
                 'skip': skip,
             },
         )
-        return [trigger['name'] for trigger in r.json()]
+        return r
     
-    def list_rules(self, limit=200, skip=0) -> List[str]:
+    def list_rules(self, limit=200, skip=0) -> Response:
         """Returns list of rule names (max limit: 200)."""
         url = f'{self.url}/rules'
         r = requests.get(
@@ -163,7 +163,7 @@ class WskClient:
                 'skip': skip,
             },
         )
-        return [rule['name'] for rule in r.json()]
+        return r
     
     def action_paginator(self) -> "WskPaginator":
         return WskPaginator(client=self, resource='action')
@@ -192,7 +192,8 @@ class WskPaginator:
     def paginate(self) -> Iterator[str]:
         limit = 200
         skip = 0
-        resources = self.list_method(limit=limit, skip=skip)
+        response = self.list_method(limit=limit, skip=skip)
+        resources = [rsc['name'] for rsc in response.json()]
         while len(resources) == 200:
             for action in resources:
                 yield action
