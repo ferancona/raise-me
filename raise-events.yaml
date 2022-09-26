@@ -4,7 +4,7 @@ events:
   s3-to-cloudfunction:
     source:
       provider: aws
-      filters: # AWS EventBridge event patterns or GCP Eventrac filters.
+      filters: # AWS EventBridge event patterns.
         - 'source: ["aws.s3"]'
         - 'detail-type: ["Object Created"]'
         - 'detail: {"bucket": {"name": ["my-bucket-name"]}}'
@@ -18,7 +18,7 @@ events:
   cloudstorage-to-lambda:
     source:
       provider: gcp
-      filters:
+      filters: # GCP Eventrac filters.
         - 'type=google.cloud.audit.log.v1.written'
         - 'serviceName=storage.googleapis.com'
         - 'methodName=storage.objects.create'
