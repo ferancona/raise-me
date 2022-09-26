@@ -1,9 +1,13 @@
 [tool.poetry]
 name = "raise-me"
 version = "0.0.1"
-description = "Multi-cloud serverless event broker which allows connecting events with targets declaratively, where such events and targets can be raised/invoked in either AWS or GCP."
+description = "Serverless event broker which allows connecting native cloud events (AWS & GCP) to targets declaratively."
+license = "MIT"
 authors = ["Fernando Ancona <f.anconac@gmail.com>"]
 readme = "README.md"
+homepage = "https://github.com/ferancona/raise-me"
+repository = "https://github.com/ferancona/raise-me"
+keywords = ["serverless", "openwhisk", "pulumi", "aws", "gcp"]
 
 [tool.poetry.scripts]
 raise = "raise_me.app:app"
