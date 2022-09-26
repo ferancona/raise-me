@@ -8,15 +8,15 @@ from raise_me.models.event.target import ActionTarget, EventTarget, HttpTarget
 class EventTargetParser:
     VALID_KEYS = (
         'http', 
-        'custom',
+        'action',
     )
 
     @classmethod
     def from_dict(cls, target: dict) -> EventTarget:
-        t_type = target.keys()[0]
+        t_type = list(target.keys())[0]
         if t_type == 'http':
             return HttpTargetParser.from_dict(http_target=target[t_type])
-        elif t_type == 'custom':
+        elif t_type == 'action':
             return ActionTargetParser.from_dict(action_target=target[t_type])
             
         raise UnrecognizedTargetType(f'{target}')
@@ -27,7 +27,7 @@ class EventTargetParser:
         if isinstance(target, dict) and \
                 len(target.keys()) == 1 and \
                 list(target.keys())[0] in cls.VALID_KEYS:
-            t_type = target.keys()[0]
+            t_type = list(target.keys())[0]
 
             if not isinstance(target[t_type], dict):
                 return False
