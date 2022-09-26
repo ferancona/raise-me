@@ -11,7 +11,7 @@ class FilterParser:
         for index, f in enumerate(filters):
             sep_index = f.index(':')
             key, val = f[:sep_index], f[sep_index + 1:]
-            filters[index] = (key, val)
+            filters[index] = (key, json.loads(val))
         return json.dumps({key: val for key, val in filters})
     
     @classmethod
