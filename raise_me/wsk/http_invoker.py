@@ -1,5 +1,5 @@
 import requests
-from typing import Dict, final
+from typing import Dict
 
 
 def main(args: dict) -> dict:
