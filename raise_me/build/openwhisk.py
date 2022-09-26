@@ -75,7 +75,10 @@ class OpenwhiskBuilder:
                     path=HTTP_MEDIATOR_PATH,
                 )
                 _ = self.wsk_client.create_rule(
-                    name=f'raise_rule-{trigger_name}-{event_mediator_name}',
+                    name=OWResourceIdentifier.rule(
+                        trigger_name=trigger_name,
+                        target_name=event_mediator_name,
+                    ),
                     trigger_name=trigger_name,
                     action_name=event_mediator_name,
                 )
