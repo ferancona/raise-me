@@ -1,5 +1,5 @@
 import requests
-from typing import Dict
+from typing import Dict, final
 
 
 def main(args: dict) -> dict:
@@ -13,5 +13,11 @@ def main(args: dict) -> dict:
         r = requests.get(url)
     else: # post
         r = requests.post(url, json=event)
-    
-    return r.json()
+
+    try:
+        response = r.json()
+    except ValueError as err:
+        response = {'body': r.text}
+    finally:
+        print(response) # Log http response.
+        return response
