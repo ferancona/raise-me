@@ -5,11 +5,6 @@ main:
       assign:
         - TRIGGER_NAME: null
         - OW_URL: null
-  - log_event:
-      call: sys.log
-      args:
-          text: ${event}
-          severity: INFO
   - fire_openwhisk_trigger:
       call: http.post
       args:
