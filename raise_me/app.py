@@ -12,19 +12,19 @@ app = typer.Typer()
 
 
 @app.command()
-def up(config_path: Optional[str] = None, deploy_path: Optional[str] = None):
+def up(config_path: Optional[str] = None, events_path: Optional[str] = None):
     conf_path = RAISE_CONFIG_PATH if config_path is None else config_path
-    deploy_path = RAISE_DEPLOYMENT_PATH if deploy_path is None else deploy_path
+    events_path = RAISE_DEPLOYMENT_PATH if events_path is None else events_path
     
     typer.echo('Creating RaiseMe OpenWhisk resources...')
     typer.echo(f' Configuration file: {conf_path}')
-    typer.echo(f' Deployment file: {deploy_path}')
+    typer.echo(f' Deployment file: {events_path}')
     
     OpenwhiskBuilder(
         wsk_client=WskClient.from_config(
             config=ConfigParser.from_yaml(path=conf_path)
     )).create_resources(
-        deployment=DeploymentParser.from_yaml(path=deploy_path))
+        deployment=DeploymentParser.from_yaml(path=events_path))
 
     typer.echo('OpenWhisk resources created!')
 
