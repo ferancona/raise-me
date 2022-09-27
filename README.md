@@ -123,7 +123,7 @@ If you are interested in handling events from services that log into Cloud Loggi
 ---
 
 ## Installation
-Run:
+Run (available on PyPi):
 ```bash
 $ pip install raise-me
 ```
@@ -133,7 +133,6 @@ $ raise --help
 ```
 
 ---
-
 
 ## Testing
 Install [Poetry](https://python-poetry.org/) if you don't have it already:
@@ -311,6 +310,3 @@ Please ensure tests are up to date.
 - [X] CLI Tool
 - [X] Pytests (OpenWhisk)
 - [X] Add documentation.
-- [ ] End-to-end integration test
-  - [ ] AWS source
-  - [ ] GCP source
