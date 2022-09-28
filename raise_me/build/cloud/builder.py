@@ -7,7 +7,7 @@ from raise_me.models import Deployment
 from raise_me.parser import ConfigParser, DeploymentParser
 
 
-class CloudOrchestrator:
+class CloudBuilder:
     def __init__(self, config_path: Union[str, pathlib.Path]) -> None:
         self.conf: Dict = ConfigParser.from_yaml(path=config_path)
         self.aws_cloud = AWSCloud(config=self.conf)
