@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "raise-me"
-version = "0.0.1"
+version = "0.0.2"
 description = "Serverless event broker which allows connecting native cloud events (AWS & GCP) to targets declaratively."
 license = "MIT"
 authors = ["Fernando Ancona <f.anconac@gmail.com>"]
