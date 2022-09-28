@@ -111,6 +111,15 @@ config:
   gcp:project: your-project-id
 ```
 
+In your `__main__.py` Pulumi file, include the code that will create the cloud resources for you:
+```python
+from raise_me.build import CloudBuilder
+
+builder = CloudBuilder(config_path='path/to/raise-config.yaml')
+builder.update_stack(events_path='path/to/raise-events.yaml')
+```
+
+
 #### Enable Google Services
 Enable the following Google services:
 - [Eventrac](https://cloud.google.com/eventarc/docs/overview) - _eventrac triggers will be created._
@@ -293,20 +302,3 @@ Please ensure tests are up to date.
 - [ ] Http request body/parameters
 - [ ] Internal API crendential storage (for HTTP targets)
 - [ ] Logging
-
----
-
-### Roadmap
-- [X] Parser module
-- [X] Builder module
-    - [X] OpenWhisk resources
-    - [X] Cloud resources
-        - [X] AWS
-            - [X] Eventbridge
-            - [X] Lambda
-        - [X] GCP
-            - [X] Eventrac
-            - [X] Workflows
-- [X] CLI Tool
-- [X] Pytests (OpenWhisk)
-- [X] Add documentation.
