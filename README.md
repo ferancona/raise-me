@@ -94,7 +94,7 @@ The solution that **raise-me** provides addresses all of these limitations by us
 
 Create a Pulumi project. You can use either a Python template, AWS or GCP. For example:
 ```bash
-$ mikdir your-project-name
+$ mkdir your-project-name
 $ pulumi new aws-python
 ```
 
